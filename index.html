@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Metadados e links de estilos/scripts -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Márcio Maker - Portfólio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+</head>
+<body>
+    <!-- Canvas de humor de fundo -->
+    <canvas id="mood-canvas"></canvas>
+    <!-- Cursores personalizados -->
+    <div class="hologram-cursor"></div>
+    <div class="hologram-cursor-follower"></div>
+    <!-- Cabeçalho e navegação holográfica -->
+    <header>
+        <nav class="hologram-menu">
+            <!-- Itens do menu de navegação -->
+            <a href="#inicio" class="hologram-item" data-section="inicio">
+                <span class="hologram-icon">🏠</span>
+                <span class="hologram-tooltip">Início</span>
+                <div class="hologram-connector"></div>
+            </a>
+            <a href="#sobre" class="hologram-item" data-section="sobre">
+                <span class="hologram-icon">👨‍💻</span>
+                <span class="hologram-tooltip">Sobre</span>
+                <div class="hologram-connector"></div>
+            </a>
+            <a href="#portfolio" class="hologram-item" data-section="portfolio">
+                <span class="hologram-icon">📂</span>
+                <span class="hologram-tooltip">Portfólio</span>
+                <div class="hologram-connector"></div>
+            </a>
+            <a href="#habilidades" class="hologram-item" data-section="habilidades">
+                <span class="hologram-icon">⚙️</span>
+                <span class="hologram-tooltip">Habilidades</span>
+                <div class="hologram-connector"></div>
+            </a>
+            <a href="#showroom" class="hologram-item" data-section="showroom">
+                <span class="hologram-icon">🌌</span>
+                <span class="hologram-tooltip">Showroom</span>
+                <div class="hologram-connector"></div>
+            </a>
+            <a href="#jornada" class="hologram-item" data-section="jornada">
+                <span class="hologram-icon">🛤️</span>
+                <span class="hologram-tooltip">Jornada</span>
+                <div class="hologram-connector"></div>
+            </a>
+            <a href="#depoimentos" class="hologram-item" data-section="depoimentos">
+                <span class="hologram-icon">💬</span>
+                <span class="hologram-tooltip">Depoimentos</span>
+                <div class="hologram-connector"></div>
+            </a>
+            <a href="#contato" class="hologram-item" data-section="contato">
+                <span class="hologram-icon">✉️</span>
+                <span class="hologram-tooltip">Contato</span>
+                <div class="hologram-connector"></div>
+            </a>
+        </nav>
+        <!-- Pontos de navegação lateral -->
+        <div class="nav-dots">
+            <div class="nav-dot" data-section="inicio"></div>
+            <div class="nav-dot" data-section="sobre"></div>
+            <div class="nav-dot" data-section="portfolio"></div>
+            <div class="nav-dot" data-section="habilidades"></div>
+            <div class="nav-dot" data-section="showroom"></div>
+            <div class="nav-dot" data-section="jornada"></div>
+            <div class="nav-dot" data-section="depoimentos"></div>
+            <div class="nav-dot" data-section="contato"></div>
+        </div>
+    </header>
+    <main>
+        <!-- Seção Hero -->
+        <section id="inicio" class="hero">
+            <h1>Márcio Maker</h1>
+            <p>Desenvolvedor Full Stack. Visagista. Arquiteto de Experiências Digitais. Reinvento.</p>
+        </section>
+        <!-- Seletor de humor -->
+        <section id="mood-selector" class="mood-selector">
+            <p>Como você está se sentindo hoje?</p>
+            <select onchange="setMood(this.value)">
+                <option value="">Selecione seu humor...</option>
+                <option value="calmo">Calmo</option>
+                <option value="criativo">Criativo</option>
+                <option value="cansado">Cansado</option>
+                <option value="feliz">Feliz</option>
+                <option value="reflexivo">Reflexivo</option>
+            </select>
+        </section>
+        <!-- Sobre Mim com card flip -->
+        <section id="sobre" class="sobre">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="sobre-card" id="sobreCard">
+                <div class="sobre-card-inner" id="sobreCardInner">
+                    <div class="sobre-front">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Foto de Márcio Maker" class="sobre-foto">
+                    </div>
+                    <div class="sobre-back">
+                        <div class="terminal">
+                            <div class="terminal-line">Olá, eu sou o Márcio Maker_</div>
+                            <div class="terminal-line">Apaixonado por códigos, cabelo e reinvenções criativas...</div>
+                            <div class="terminal-line">Visagismo, cortes, estética emocional visagista, hoje desenvolvedor full-stack</div>
+                            <div class="terminal-line">Acredito que tecnologia e estética caminham juntas</div>
+                            <div class="terminal-line">Meu lema: "Reinventar é o código mais bonito que escrevo"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Portfólio de projetos -->
+        <section id="portfolio" class="portfolio">
+            <h2 class="section-title">Portfólio</h2>
+            <div class="projects-grid">
+                <!-- Card de projeto 1 -->
+                <div class="project-card">
+                    <div class="project-card-inner">
+                        <div class="project-card-front">
+                            <img src="https://images.unsplash.com/photo-1516321310762-479b3f3d4f4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Oráculo Estético" class="project-image">
+                            <h3>Oráculo Estético</h3>
+                            <p>Flask + JavaScript</p>
+                        </div>
+                        <div class="project-card-back">
+                            <h3>Oráculo Estético</h3>
+                            <p>Uma ponte entre visagismo e IA, sugerindo cortes baseados em formato facial.</p>
+                            <div class="button-group">
+                                <a href="#" class="btn btn-small">Ver Projeto</a>
+                                <a href="#" class="btn btn-small secondary">Código</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card de projeto 2 -->
+                <div class="project-card">
+                    <div class="project-card-inner">
+                        <div class="project-card-front">
+                            <img src="https://images.unsplash.com/photo-1516321310762-479b3f3d4f4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Site 3D Interativo" class="project-image">
+                            <h3>Site 3D Interativo</h3>
+                            <p>Three.js + GSAP</p>
+                        </div>
+                        <div class="project-card-back">
+                            <h3>Site 3D Interativo</h3>
+                            <p>Experiência imersiva com elementos 3D que respondem ao scroll.</p>
+                            <div class="button-group">
+                                <a href="#" class="btn btn-small">Ver Projeto</a>
+                                <a href="#" class="btn btn-small secondary">Código</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card de projeto 3 -->
+                <div class="project-card">
+                    <div class="project-card-inner">
+                        <div class="project-card-front">
+                            <img src="https://images.unsplash.com/photo-1516321310762-479b3f3d4f4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="App de Presença Digital" class="project-image">
+                            <h3>App de Presença Digital</h3>
+                            <p>React + Node.js</p>
+                        </div>
+                        <div class="project-card-back">
+                            <h3>App de Presença Digital</h3>
+                            <p>Plataforma para profissionais recriarem sua identidade online.</p>
+                            <div class="button-group">
+                                <a href="#" class="btn btn-small">Ver Projeto</a>
+                                <a href="#" class="btn btn-small secondary">Código</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Habilidades com barras de progresso -->
+        <section id="habilidades" class="habilidades">
+            <h2 class="section-title">Habilidades</h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-name">Vue.js <span>80%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Python <span>70%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="70%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Visagismo <span>95%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Web3/IA <span>60%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="60%"></div></div>
+                </div>
+            </div>
+        </section>
+        <!-- Showroom de habilidades 3D -->
+        <section id="showroom" class="skill-showcase">
+            <h2 class="section-title">Showroom de Habilidades</h2>
+            <canvas id="skills-canvas"></canvas>
+            <div class="skill-info">Interaja com a visualização 3D para explorar minhas habilidades!</div>
+        </section>
+        <!-- Linha do tempo da jornada -->
+        <section id="jornada" class="jornada">
+            <h2 class="section-title">Minha Jornada</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2000</h3>
+                        <p>Visagismo, cortes, estética emocional</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2014</h3>
+                        <p>Formado em Administração</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2020</h3>
+                        <p>Pandemia → Descoberta do código</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2024</h3>
+                        <p>Curso Full Stack + IA</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2025</h3>
+                        <p>Criação de novos projetos 3D</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Depoimentos de clientes e colegas -->
+        <section id="depoimentos" class="depoimentos">
+            <h2 class="section-title">Depoimentos</h2>
+            <div class="testimonials">
+                <div class="testimonial-item">
+                    <p>"Márcio é um verdadeiro artista do código! Sua visão estética transforma cada projeto em uma obra-prima."</p>
+                    <span>- Cliente Satisfeito</span>
+                </div>
+                <div class="testimonial-item">
+                    <p>"A paixão de Márcio pelo que faz é contagiante. Ele não apenas entrega resultados, mas também inspira todos ao seu redor."</p>
+                    <span>- Colega Desenvolvedor</span>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Trabalhar com Márcio foi uma experiência única. Sua habilidade em combinar tecnologia e estética é impressionante."</p>
+                    <span>- Parceiro de Projeto</span>
+                </div>
+            </div>
+        </section>
+        <!-- Formulário de contato -->
+        <section id="contato" class="contato">
+            <h2 class="section-title">Construa Comigo</h2>
+            <form class="blueprint-form">
+                <div class="form-group">
+                    <label class="form-label" for="nome">NOME:</label>
+                    <input type="text" id="nome" class="form-input" required>
+                    <div class="error-message">Por favor, insira seu nome.</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">EMAIL:</label>
+                    <input type="email" id="email" class="form-input" required>
+                    <div class="error-message">Por favor, insira um email válido.</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="mensagem">MENSAGEM:</label>
+                    <textarea id="mensagem" class="form-input" required></textarea>
+                    <div class="error-message">Por favor, insira sua mensagem.</div>
+                </div>
+                <button type="submit" class="form-submit">ENVIAR PROJETO</button>
+            </form>
+        </section>
+    </main>
+    <!-- Rodapé com links sociais -->
+    <footer class="social-links">
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    </footer>
+    <!-- Modal para exibição de conteúdo dinâmico -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+    <!-- Script principal -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,995 @@
+/* style.css */
+
+/* Define global CSS variables for consistent theming */
+:root {
+    --primary: #8b5a2b; /* Primary color for buttons and accents */
+    --secondary: #6d4a2b; /* Secondary color for hover states */
+    --light: #e0e0e0; /* Light background for cards */
+    --dark: #1a1a1a; /* Dark text color */
+    --accent: #4fc3f7; /* Accent color for highlights and borders */
+    --background-dark: #0a0a0a; /* Dark background for body */
+    --text-light: #f0f0f0; /* Light text color for readability */
+    --border-glow: rgba(79, 195, 247, 0.5); /* Glow effect for borders */
+}
+
+/* Reset default margins, padding, and set box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base body styling for font, color, and background */
+body {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--text-light);
+    line-height: 1.8;
+    background-color: var(--background-dark);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    cursor: none; /* Custom cursor enabled */
+}
+
+/* Canvas for Three.js particle background */
+#mood-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Behind all content */
+    pointer-events: none; /* Prevents interaction with canvas */
+}
+
+/* Hero section styling with 3D perspective */
+.hero {
+    text-align: center;
+    padding: 6rem 1rem 4rem;
+    color: var(--text-light);
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0));
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+/* Hero section heading with glowing text shadow */
+.hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px var(--accent);
+}
+
+/* Hero section paragraph styling */
+.hero p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* Mood selector styling */
+.mood-selector {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(79, 195, 247, 0.2);
+    position: relative;
+    z-index: 10;
+    color: var(--text-light);
+}
+
+/* Mood-specific text colors and shadows */
+.mood-selector.calmo-text { color: #0a0a0a; text-shadow: 0 1px 4px #fff, 0 0 2px #c2e9fb; }
+.mood-selector.criativo-text { color: #222; text-shadow: 0 1px 4px #fff, 0 0 2px #fbc2eb; }
+.mood-selector.cansado-text { color: #fff; text-shadow: 0 1px 4px #000, 0 0 2px #434343; }
+.mood-selector.feliz-text { color: #1a1a1a; text-shadow: 0 1px 4px #fff, 0 0 2px #fddb92; }
+.mood-selector.reflexivo-text { color: #fff; text-shadow: 0 1px 4px #222, 0 0 2px #355c7d; }
+
+/* Mood selector dropdown styling */
+.mood-selector select {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: 1.5px solid var(--accent);
+    background: rgba(10, 10, 10, 0.85);
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(79,195,247,0.08);
+}
+
+/* Hover and focus states for mood selector dropdown */
+.mood-selector select:hover,
+.mood-selector select:focus {
+    background: rgba(79, 195, 247, 0.15);
+    border-color: var(--primary);
+    color: var(--accent);
+}
+
+/* General section styling */
+section {
+    scroll-margin-top: 6rem; /* Space for smooth scrolling anchors */
+    padding: 3rem 1rem;
+    position: relative;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.4);
+    margin-bottom: 4rem; /* Default bottom margin for sections */
+    border-bottom: 1px solid rgba(79, 195, 247, 0.1);
+    transform-style: preserve-3d;
+}
+
+/* Enhanced section divider for visual separation */
+section::after {
+    content: '';
+    display: block;
+    width: 90%; /* Wider divider for clarity */
+    height: 2px; /* Thicker for visibility */
+    margin: 3rem auto 0; /* Increased margin for spacing */
+    background: linear-gradient(to right, transparent, var(--accent), transparent);
+    opacity: 0.4; /* Increased opacity */
+}
+
+/* Specific styling for Sobre section with increased margin to separate from Portfólio */
+section.sobre {
+    padding: 5rem 1rem;
+    margin-bottom: 30rem; /* Increased from 8rem to ensure clear separation */
+}
+
+/* Specific styling for Portfólio section with increased top padding */
+section#portfolio {
+    padding: 6rem 1rem 4rem; /* Increased top padding from 4rem to 6rem */
+    margin-bottom: 8rem; /* Consistent with original */
+}
+
+/* Section title styling */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+/* Underline for section titles */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* Sobre card styling for 3D flip effect */
+.sobre-card {
+    max-width: 800px;
+    margin: auto;
+    perspective: 1500px;
+}
+
+/* Inner container for card flip */
+.sobre-card-inner {
+    position: relative;
+    width: 100%;
+    transition: transform 1.2s ease;
+    transform-style: preserve-3d;
+}
+
+/* Front and back faces of Sobre card */
+.sobre-front,
+.sobre-back {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Back face styling */
+.sobre-back {
+    transform: rotateY(180deg);
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Sobre section photo styling */
+.sobre-foto {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 20px var(--accent);
+}
+
+/* Flipped state for Sobre card */
+.sobre-card.flipped .sobre-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Button group for project links */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* General button styling */
+.btn {
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-family: 'Rajdhani', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+/* Small button styling */
+.btn-small {
+    background-color: var(--accent);
+    color: var(--dark);
+    border: 1px solid var(--accent);
+}
+
+/* Hover state for small buttons */
+.btn-small:hover {
+    background-color: transparent;
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+}
+
+/* Secondary small button styling */
+.btn-small.secondary {
+    background-color: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--text-light);
+}
+
+/* Hover state for secondary small buttons */
+.btn-small.secondary:hover {
+    background-color: var(--secondary);
+    color: var(--text-light);
+    border-color: var(--secondary);
+}
+
+/* Terminal styling for Sobre section */
+.terminal {
+    background: rgba(0, 0, 0, 0.9);
+    color: #0f0;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 1rem auto;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+    position: relative;
+    border: 1px solid #0f0;
+}
+
+/* Terminal header bar */
+.terminal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: #333;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Terminal prompt text */
+.terminal::after {
+    content: "▶ user@machine:~$";
+    position: absolute;
+    top: 8px;
+    left: 15px;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+}
+
+/* Terminal line styling */
+.terminal-line {
+    margin-bottom: 1rem;
+    padding-left: 15px;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+}
+
+/* Cursor animation for terminal typing effect */
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    background: #0f0;
+    animation: blink 1s infinite step-end;
+    vertical-align: middle;
+}
+
+/* Blink animation for terminal cursor */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Projects grid for Portfólio section */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem; /* Kept original gap for card spacing */
+    padding: 3rem 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* Project card styling */
+.project-card {
+    width: 100%;
+    max-width: 340px;
+    height: 320px;
+    perspective: 1200px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+/* Inner container for project card flip */
+.project-card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform-style: preserve-3d;
+}
+
+/* Flip effect on project card hover */
+.project-card:hover .project-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front and back faces of project card */
+.project-card-front,
+.project-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: var(--light);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark);
+}
+
+/* Back face of project card */
+.project-card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, var(--dark), #333);
+    color: var(--text-light);
+}
+
+/* Project card back heading */
+.project-card-back h3 {
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
+/* Project card image */
+.project-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+/* Skills container styling */
+.skills-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+/* Skill item styling */
+.skill-item {
+    margin-bottom: 1.5rem;
+}
+
+/* Skill name and percentage */
+.skill-name {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+    font-size: 1rem;
+    color: var(--accent);
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Skill bar container */
+.skill-bar {
+    height: 20px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Skill progress bar */
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    width: 0;
+    border-radius: 10px;
+}
+
+/* Skill showcase section */
+.skill-showcase {
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+/* Skills canvas for 3D visualization */
+#skills-canvas {
+    position: relative !important;
+    height: 400px;
+    z-index: 1;
+    pointer-events: auto;
+}
+
+/* Skill info popup */
+.skill-info {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 10, 20, 0.9);
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--accent);
+    color: var(--text-light);
+    max-width: 500px;
+    text-align: left;
+}
+
+/* Timeline styling */
+.timeline {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    position: relative;
+}
+
+/* Timeline vertical line */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background: var(--primary);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    border-radius: 3px;
+}
+
+/* Timeline item styling */
+.timeline-item {
+    padding: 15px 40px;
+    position: relative;
+    width: 50%;
+}
+
+/* Odd and even timeline items for alternating sides */
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+
+/* Timeline item marker */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: var(--accent);
+    border: 3px solid var(--background-dark);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Marker positioning for odd and even items */
+.timeline-item:nth-child(odd)::before {
+    right: -7.5px;
+}
+
+.timeline-item:nth-child(even)::before {
+    left: -7.5px;
+}
+
+/* Timeline content styling */
+.timeline-content {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    color: var(--text-light);
+    border: 1px solid rgba(79, 195, 247, 0.2);
+}
+
+/* Hover effect for timeline content */
+.timeline-content:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+}
+
+/* Timeline content heading */
+.timeline-content h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+}
+
+/* Blueprint form styling */
+.blueprint-form {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: linear-gradient(145deg, rgba(25, 25, 30, 0.9), rgba(15, 15, 20, 0.95));
+    border: 1px solid rgba(79, 195, 247, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Form border glow effect */
+.blueprint-form::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 15px;
+    padding: 2px;
+    background: linear-gradient(45deg, var(--accent), var(--primary));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.1;
+}
+
+/* Hover state for form border */
+.blueprint-form:hover::before {
+    opacity: 0.3;
+}
+
+/* Form title */
+.blueprint-form::after {
+    content: "CONECTE-SE";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--background-dark);
+    padding: 6px 20px;
+    color: var(--accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    border-radius: 8px;
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+/* Form group underline animation */
+.form-group::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--primary));
+    transform: scaleX(0);
+    transition: transform 0.5s ease-out;
+}
+
+/* Underline animation on focus */
+.form-group:focus-within::after {
+    transform: scaleX(1);
+}
+
+/* Form label styling */
+.form-label {
+    display: block;
+    margin-bottom: 0.6rem;
+    color: var(--accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+/* Form input styling */
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(79, 195, 247, 0.2);
+    border-radius: 6px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Form input focus state */
+.form-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 12px rgba(79, 195, 247, 0.3);
+}
+
+/* Invalid form input state */
+.form-input.invalid {
+    border-color: #ff4d4d;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.4);
+}
+
+/* Error message styling */
+.error-message {
+    color: #ff4d4d;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: none;
+}
+
+/* Textarea styling */
+textarea.form-input {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Form submit button styling */
+.form-submit {
+    background: linear-gradient(45deg, var(--accent), var(--primary));
+    color: var(--dark);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+/* Form submit button hover state */
+.form-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(79, 195, 247, 0.4);
+}
+
+/* Social links container */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+/* Social link icons */
+.social-links a {
+    color: var(--text-light);
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+}
+
+/* Social link hover state */
+.social-links a:hover {
+    color: var(--accent);
+    text-shadow: 0 0 12px var(--accent);
+}
+
+/* Navigation dots for scrolling */
+.nav-dots {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+}
+
+/* Individual navigation dot */
+.nav-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(139, 90, 43, 0.4);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* Active navigation dot */
+.nav-dot.active {
+    background: var(--primary);
+    transform: scale(1.3);
+    border: 2px solid var(--accent);
+}
+
+/* Holographic menu styling */
+.hologram-menu {
+    position: fixed;
+    bottom: 2rem; /* Kept original position */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2rem;
+    z-index: 1000;
+    padding: 1rem 2rem;
+    background: rgba(10, 10, 20, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 40px;
+    border: 1px solid rgba(79, 195, 247, 0.2);
+}
+
+/* Holographic menu item */
+.hologram-item {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Holographic menu icon */
+.hologram-icon {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+/* Holographic menu item background effect */
+.hologram-item::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(79, 195, 247, 0.1);
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+/* Hover state for menu item icon */
+.hologram-item:hover .hologram-icon {
+    color: var(--accent);
+    transform: translateY(-8px);
+}
+
+/* Hover state for menu item background */
+.hologram-item:hover::before {
+    transform: scale(1);
+}
+
+/* Active state for menu item icon */
+.hologram-item.active .hologram-icon {
+    color: var(--accent);
+    text-shadow: 0 0 12px rgba(79, 195, 247, 0.6);
+}
+
+/* Holographic tooltip styling */
+.hologram-tooltip {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 10, 20, 0.9);
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(79, 195, 247, 0.3);
+    color: var(--text-light);
+}
+
+/* Tooltip visibility on hover */
+.hologram-item:hover .hologram-tooltip {
+    opacity: 1;
+    top: -45px;
+}
+
+/* Custom cursor styling */
+.hologram-cursor {
+    position: fixed;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(79, 195, 247, 0.5);
+    pointer-events: none;
+    z-index: 1001;
+    transform: translate(-50%, -50%);
+}
+
+/* Cursor follower styling */
+.hologram-cursor-follower {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(79, 195, 247, 0.3);
+    pointer-events: none;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+}
+
+/* Connector line for holographic menu */
+.hologram-connector {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform-origin: left center;
+    opacity: 0;
+}
+
+/* Mood-specific body background and text colors */
+body.calmo { background: linear-gradient(to right, #c2e9fb, #a1c4fd); color: #1a1a1a; }
+body.calmo .hologram-icon,
+body.calmo .hologram-tooltip { color: #1a1a1a; }
+body.criativo { background: linear-gradient(to right, #fbc2eb, #a6c1ee); color: #1a1a1a; }
+body.criativo .hologram-icon,
+body.criativo .hologram-tooltip { color: #1a1a1a; }
+body.cansado { background: linear-gradient(to right, #434343, #000000); color: #fff; }
+body.cansado .hologram-icon,
+body.cansado .hologram-tooltip { color: #fff; }
+body.feliz { background: linear-gradient(to right, #fddb92, #d1fdff); color: #1a1a1a; }
+body.feliz .hologram-icon,
+body.feliz .hologram-tooltip { color: #1a1a1a; }
+body.reflexivo { background: linear-gradient(to right, #355c7d, #6c5b7b, #c06c84); color: #fff; }
+body.reflexivo .hologram-icon,
+body.reflexivo .hologram-tooltip { color: #fff; }
+
+/* Depoimentos section styling */
+.depoimentos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+/* Testimonials container */
+.testimonials {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Individual testimonial item */
+.testimonial-item {
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(79,195,247,0.10);
+    padding: 1.5rem;
+    max-width: 300px;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* Testimonial text */
+.testimonial-item p {
+    margin-bottom: 0.8rem;
+}
+
+/* Testimonial author */
+.testimonial-item span {
+    align-self: flex-end;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+    .hero { padding: 8rem 1rem 5rem; }
+    .hero h1 { font-size: 4rem; }
+    .hero p { font-size: 1.4rem; }
+    .section-title { font-size: 3rem; }
+    .projects-grid { gap: 4rem; padding: 4rem 1rem; }
+    .project-card { max-width: 360px; height: 340px; }
+    .sobre {
+        padding: 6rem 1rem;
+        margin-bottom: 18rem; /* Increased for larger screens */
+    }
+    #portfolio {
+        padding: 7rem 1rem 5rem; /* Increased top padding */
+        margin-bottom: 10rem;
+    }
+    .blueprint-form { padding: 2rem; }
+}
+
+/* Media query for medium screens */
+@media (max-width: 768px) {
+    .hero { padding: 6rem 1rem 3rem; }
+    .hero h1 { font-size: 3rem; }
+    .hero p { font-size: 1.2rem; }
+    .hologram-menu { gap: 1.5rem; padding: 0.8rem 1.5rem; }
+    .hologram-item { width: 40px; height: 40px; }
+    .hologram-icon { font-size: 1.2rem; }
+    .section-title { font-size: 2.5rem; }
+    .projects-grid { gap: 2.5rem; padding: 2.5rem 1rem; }
+    .project-card { max-width: 300px; height: 300px; }
+    .timeline-item { width: 100%; padding: 15px 30px; }
+    .timeline-item:nth-child(even) { left: 0; }
+    .timeline-item:nth-child(odd)::before,
+    .timeline-item:nth-child(even)::before { left: -7.5px; }
+    section { padding: 2.5rem 1rem; margin-bottom: 3rem; }
+    .sobre {
+        padding: 4rem 1rem;
+        margin-bottom: 10rem; /* Adjusted for medium screens */
+    }
+    #portfolio {
+        padding: 5rem 1rem 3rem; /* Adjusted top padding */
+        margin-bottom: 6rem;
+    }
+}
+
+/* Media query for small screens */
+@media (max-width: 576px) {
+    .hero { padding: 5rem 1rem 2rem; }
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1rem; }
+    .hologram-menu { gap: 1rem; padding: 0.5rem 1rem; bottom: 1rem; }
+    .hologram-item { width: 36px; height: 36px; }
+    .hologram-icon { font-size: 1rem; }
+    .section-title { font-size: 2rem; margin-bottom: 2rem; }
+    .projects-grid { gap: 2rem; padding: 2rem 1rem; }
+    .project-card { max-width: 280px; height: 280px; }
+    .blueprint-form { padding: 1rem; }
+    .form-submit { padding: 10px 20px; font-size: 1rem; }
+    section { padding: 2rem 1rem; margin-bottom: 2.5rem; }
+    .sobre {
+        padding: 3rem 1rem;
+        margin-bottom: 8rem; /* Adjusted for small screens */
+    }
+    #portfolio {
+        padding: 4rem 1rem 2.5rem; /* Adjusted top padding */
+        margin-bottom: 5rem;
+    }
+}
